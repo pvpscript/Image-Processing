@@ -1,5 +1,5 @@
 # Image-Processing
-Application showcase for algorithms that I studied in Graphical Computing class.
+Java GUI application serving as showcase for algorithms that I studied in Graphical Computing class.
 
 ## About
 
