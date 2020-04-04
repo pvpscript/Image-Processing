@@ -51,9 +51,8 @@ public class Syntactical {
 		return output;
 	}
 	
-	public static double eval(String func, double x) {
+	public static double eval(List<Token> tokens, double x) {
 		try {
-			List<Token> tokens = Lexical.analyse(func);
 			List<Token> rpn = Syntactical.parse(tokens);
 			
 			Stack<Token> evalStack = new Stack<Token>();
