@@ -34,6 +34,8 @@ public class GraphicPopup extends Popup {
 	JTextField fieldB;
 	JCheckBox chckbxShowAxisOne;
 	JCheckBox chckbxShowAxisTwo;
+	protected boolean showAxisOne = false;
+	protected boolean showAxisTwo = false;
 
 	public GraphicPopup(GUI parent, String title, int width, int height) {
 		super(parent, title, width, height);
@@ -50,11 +52,21 @@ public class GraphicPopup extends Popup {
 		rdbtnImageOne = new JRadioButton("Image 1");
 		rdbtnImageOne.setEnabled(false);
 		rdbtnImageOne.setSelected(true);
+		rdbtnImageOne.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnImageTwo.setSelected(false);
+			}
+		});
 		rdbtnImageOne.setBounds(22, 39, 110, 23);
 		this.getContentPane().add(rdbtnImageOne);
 		
 		rdbtnImageTwo = new JRadioButton("Image 2");
 		rdbtnImageTwo.setEnabled(false);
+		rdbtnImageTwo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnImageOne.setSelected(false);
+			}
+		});
 		rdbtnImageTwo.setBounds(148, 39, 110, 23);
 		this.getContentPane().add(rdbtnImageTwo);
 		
@@ -115,16 +127,16 @@ public class GraphicPopup extends Popup {
 				if (parent.canvasTwoEnabled) {
 					if (rdbtnImageOne.isSelected()) {
 						graphic = Graphic.drawFunction(parent.imageOne, vertLow, vertHigh,
-								horLow, horHigh, fieldEquation.getText(), funcColor);
+								horLow, horHigh, fieldEquation.getText(), funcColor, showAxisOne);
 						parent.updateOne(graphic);
 					} else if (rdbtnImageTwo.isSelected()){
 						graphic = Graphic.drawFunction(parent.imageTwo, vertLow, vertHigh,
-								horLow, horHigh, fieldEquation.getText(), funcColor);
+								horLow, horHigh, fieldEquation.getText(), funcColor, showAxisTwo);
 						parent.updateTwo(graphic);
 					}
 				} else {
 					graphic = Graphic.drawFunction(parent.imageOne, vertLow, vertHigh,
-							horLow, horHigh, fieldEquation.getText(), funcColor);
+							horLow, horHigh, fieldEquation.getText(), funcColor, showAxisOne);
 					parent.updateOne(graphic);
 				}
 			}
@@ -180,6 +192,7 @@ public class GraphicPopup extends Popup {
 		chckbxShowAxisOne = new JCheckBox("Show Axis");
 		chckbxShowAxisOne.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				showAxisOne = !showAxisOne;
 				System.out.println("Switch axis for image one.");
 			}
 		});
@@ -190,6 +203,7 @@ public class GraphicPopup extends Popup {
 		chckbxShowAxisTwo.setEnabled(false);
 		chckbxShowAxisTwo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				showAxisTwo = !showAxisTwo;
 				System.out.println("Switch axis for image two.");
 			}
 		});

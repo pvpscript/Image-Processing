@@ -50,7 +50,7 @@ public class Graphic {
 	}
 	
 	public static Image drawFunction(Image image, double vertLow, double vertHigh,
-			double horLow, double horHigh, String function, double[] color) {
+			double horLow, double horHigh, String function, double[] color, boolean drawAxis) {
 		Mat img = image.getMatrix();
 //		double vertLow = -5;
 //		double vertHigh = 10;
@@ -67,8 +67,10 @@ public class Graphic {
 	    double scale = offset / image.getRows();
 	    int row = (int) Math.round((vertHigh * image.getRows() / offset));
 	 
-	    drawXAxis(img, vertLow, vertHigh);
-	    drawYAxis(img, horLow, horHigh);
+	    if (drawAxis) {
+		    drawXAxis(img, vertLow, vertHigh);
+		    drawYAxis(img, horLow, horHigh);
+	    }
 	    
 	    List<Token> tokens = Lexical.analyse(function);
 	    
