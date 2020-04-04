@@ -135,9 +135,13 @@ public class GraphicPopup extends Popup {
 		btnGraphicHelp = new JButton("Help");
 		btnGraphicHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Para utilizar o campo function, basta digitar números que representem um polinômio."
-						+ "\nex: \"1 0 0\" representa x^2"
-						+ "\nex: \"4 7 0 5\" representa 4x^3 + 7x^2 + 5");
+				JOptionPane.showMessageDialog(null,
+						"To plot a graph, just type in a polynomial function.\n\n\n"
+						+ "Variables, operators, functions and constants that are accepted by the parser are the following:\n\n"
+						+ "Variables: \"x\" is the only accepted variable, otherwise it'll raise a lexical error.\n"
+						+ "Operators: \"+\", \"-\", \"*\", \"/\", \"^\", \"%\";\n"
+						+ "Functions: \"sin()\", \"cos()\", \"tan()\", \"exp()\", \"ln()\";"
+						+ "Constants: \"PI\"");
 			}
 		});
 		btnGraphicHelp.setBounds(12, 128, 246, 25);

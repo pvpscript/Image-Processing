@@ -10,6 +10,9 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Point;
 
 import imageUtils.Image;
+import parser.Lexical;
+import parser.Syntactical;
+import parser.Token;
 
 public class Graphic {
 	private static void drawXAxis(Mat img, double vertLow, double vertHigh) {
@@ -67,8 +70,10 @@ public class Graphic {
 	    drawXAxis(img, vertLow, vertHigh);
 	    drawYAxis(img, horLow, horHigh);
 	    
+	    List<Token> tokens = Lexical.analyse(function);
+	    
 	    for(dI=horLow, i=0; dI < horHigh && i < img.cols(); dI+=step, i++) {
-	        val = (int) (Math.round(-evaluate(function, dI) / scale) + row);
+	        val = (int) (Math.round(-Syntactical.eval(tokens, dI) / scale) + row);
 	 
         	points.add(new Point(i, val));
 
@@ -85,17 +90,5 @@ public class Graphic {
 	    
 
 	    return new Image(img, image.getPixelsType());
-	}
-	
-	private static double evaluate(String function, double val) {
-		String[] elements = function.split(" ");
-		double sum = 0.0;
-		
-		for(int i = 0; i < elements.length; i++) {
-			sum += Double.parseDouble(elements[i]) *
-					Math.pow(val, elements.length - i - 1);
-		}
-		
-		return sum;
 	}
 }
